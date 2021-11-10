@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://localhost:3306/dotnet_demo_api</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="workforces_db@localhost" uuid="c51a4286-c65c-4c9b-a3ee-9c11f12f2dad">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://localhost:3306/workforces_db</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
-using WebApiCiCd.Data;
 using WebApiCiCd.Entities;
 
 namespace WebApiCiCd.Services

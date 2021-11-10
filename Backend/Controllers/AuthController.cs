@@ -28,14 +28,28 @@ namespace WebApiCiCd.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDto dto)
         {
-            var user = new User
+            try
             {
-                Name = dto.Name,
-                Email = dto.Email,
-                Password = BCrypt.Net.BCrypt.HashPassword(dto.Password)
-            };
-            
-            return Created("success", await _repository.Create(user));
+                var jwt = Request.Cookies["jwt"];
+                _jwtService.Verify(jwt);
+
+                return BadRequest("already logged in");
+            }
+            catch (Exception)
+            {
+                var user = new User
+                {
+                    Name = dto.Name,
+                    Email = dto.Email,
+                    Password = BCrypt.Net.BCrypt.HashPassword(dto.Password),
+                    Role = dto.Role,
+                    Address = dto.Address,
+                    ResumeUrl = dto.ResumeUrl,
+                    WorkExperience = dto.WorkExperience
+                };
+
+                return Created("success", await _repository.Create(user));
+            }
         }
         #endregion
 

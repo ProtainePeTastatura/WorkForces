@@ -1,7 +1,8 @@
+using System;
 using Microsoft.EntityFrameworkCore;
 using WebApiCiCd.Entities;
 
-namespace WebApiCiCd.Data
+namespace WebApiCiCd.Services
 {
     public class UserContext: DbContext
     {
@@ -17,6 +18,16 @@ namespace WebApiCiCd.Data
             {
                 entity.HasIndex(e => e.Email).IsUnique();
             });
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Role)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (UserRole) Enum.Parse(typeof(UserRole), v));
+            
+            modelBuilder.Entity<User>()
+                .Property(e => e.WorkExperience)
+                .HasDefaultValue(0);
         }
     }
 }

@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebApiCiCd.Data;
+using WebApiCiCd.Services;
 
 namespace WebApiCiCd.Migrations
 {
     [DbContext(typeof(UserContext))]
-    [Migration("20211024180654_CreateUserTable")]
-    partial class CreateUserTable
+    [Migration("20211110080819_RemoveDefaultValueForUserRole")]
+    partial class RemoveDefaultValueForUserRole
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,11 +18,14 @@ namespace WebApiCiCd.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.11");
 
-            modelBuilder.Entity("WebApiCiCd.Models.User", b =>
+            modelBuilder.Entity("WebApiCiCd.Entities.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
 
                     b.Property<string>("Email")
                         .HasColumnType("varchar(767)");
@@ -32,6 +35,17 @@ namespace WebApiCiCd.Migrations
 
                     b.Property<string>("Password")
                         .HasColumnType("text");
+
+                    b.Property<string>("ResumeUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("WorkExperience")
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
 
                     b.HasKey("Id");
 
